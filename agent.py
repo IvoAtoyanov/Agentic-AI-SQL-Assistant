@@ -1,25 +1,13 @@
 from openai import OpenAI
 
+import streamlit as st
+
 import re
 
-import streamlit as st
 
 
+SCHEMA="""
 
-from openai import OpenAI
-import streamlit as st
-
-client = OpenAI(
-
-    base_url="https://openrouter.ai/api/v1",
-
-    api_key=st.secrets["OPENROUTER_API_KEY"]
-
-)
-
-
-
-SCHEMA = """
 
 customers(
 
@@ -57,12 +45,21 @@ quantity INTEGER
 
 )
 
+
 """
 
 
 
-
 def generate_sql(question):
+
+
+    client=OpenAI(
+
+    base_url="https://openrouter.ai/api/v1",
+
+    api_key=st.secrets["OPENROUTER_API_KEY"]
+
+    )
 
 
 
@@ -71,11 +68,10 @@ def generate_sql(question):
 You are an AI SQL Agent.
 
 
-Database:
+Database schema:
 
 
 {SCHEMA}
-
 
 
 Rules:
@@ -89,7 +85,7 @@ Rules:
 
 4.No explanations
 
-5.One query only
+5.Return ONE query only
 
 
 
@@ -123,7 +119,10 @@ SQL:
 
     }
 
-    ]
+    ],
+
+
+    timeout=60
 
 
     )
