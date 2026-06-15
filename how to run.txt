@@ -1,0 +1,73 @@
+HOW TO RUN
+
+1. Clone the repository:
+
+git clone https://github.com/YOUR_USERNAME/Agentic-AI-SQL-Assistant.git
+
+2. Open the project folder:
+
+cd Agentic-AI-SQL-Assistant
+
+3. Install required libraries:
+
+pip install -r requirements.txt
+
+If requirements.txt is missing:
+
+pip install streamlit
+
+pip install pandas
+
+pip install openai
+
+4. Create the database:
+
+python create_db.py
+
+You should see:
+
+Database created
+
+5. Get your OpenRouter API key:
+
+https://openrouter.ai
+
+Create an API key.
+
+6. Create Streamlit secrets file:
+
+Create:
+
+.streamlit/secrets.toml
+
+Add:
+
+OPENROUTER_API_KEY="YOUR_API_KEY"
+
+Example:
+
+OPENROUTER_API_KEY="sk-or-v1-xxxxxxxx"
+
+7. Run the application:
+
+python -m streamlit run app.py
+
+8. Open:
+
+http://localhost:8501
+
+Example Questions:
+
+Show all customers
+
+Show customers from Sofia
+
+Show customers older than 25
+
+Show all products
+
+Show products cheaper than 500
+
+How many customers live in Sofia?
+
+Show the oldest customer

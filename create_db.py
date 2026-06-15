@@ -1,0 +1,11 @@
+import sqlite3
+conn=sqlite3.connect("shop.db")
+cur=conn.cursor()
+for t in ["customers","products","orders"]: cur.execute(f"DROP TABLE IF EXISTS {t}")
+cur.execute("CREATE TABLE customers(id INTEGER PRIMARY KEY,name TEXT,city TEXT,age INTEGER)")
+cur.execute("CREATE TABLE products(id INTEGER PRIMARY KEY,name TEXT,price REAL)")
+cur.execute("CREATE TABLE orders(id INTEGER PRIMARY KEY,customer_id INTEGER,product_id INTEGER,quantity INTEGER)")
+cur.executemany("INSERT INTO customers(name,city,age) VALUES (?,?,?)",[("Ivan","Sofia",25),("Maria","Plovdiv",30),("Georgi","Sofia",21),("Petar","Varna",29),("Anna","Sofia",34),("Nikolay","Burgas",42)])
+cur.executemany("INSERT INTO products(name,price) VALUES (?,?)",[("Laptop",2200),("Mouse",40),("Keyboard",90),("Monitor",400),("Headphones",120)])
+cur.executemany("INSERT INTO orders(customer_id,product_id,quantity) VALUES (?,?,?)",[(1,1,1),(1,2,2),(2,4,1),(5,3,1),(6,1,1)])
+conn.commit();conn.close();print('Database created')
